@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
 
-players = pd.read_csv("../nba.csv").dropna(subset=["Age", "Salary"]).to_numpy()
+def calcule_mean_salary(players_position):
+    return round(players_position[:, 8].mean(), 2)
 
-ages = players[:, 4]
-salaries = players[:, 8]
+players = pd.read_csv("../nba.csv").dropna(subset=["Salary"]).to_numpy()
 
-mask = (ages > 32) & (salaries > 15000000)
+positions = players[:, 3]
 
-print(players[mask])
+print(f"NBA average salary by position (in $):")
+for p in np.unique(positions):
+    print(f"{p}: ${calcule_mean_salary(players[positions == p]):,}")
