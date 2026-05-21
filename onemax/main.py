@@ -57,12 +57,30 @@ def mutation(population, rate=0.05):
     return population
 
 
-population = np.random.randint(low=0, high=2, size=(10, 5))
+GENES = 5
+POPULATION = 10
+GENERATIONS = 50
 
-scores = fitness(population)
+population = np.random.randint(low=0, high=2, size=(POPULATION, GENES))
 
-selected = selection(population, scores)
+for gen in range(GENERATIONS):
+    scores = fitness(population)
 
-crossover(selected)
+    index_best = np.argmax(scores)
+    score_best = scores[index_best]
+    best = population[index_best]
 
-mutation(selected)
+    print(f"Generation {gen} | Best fitness: {(score_best/GENES)*100}% | Genes: {best}")
+
+    # if score_best == GENES:
+    #     print(f"Optimal solution encountered in generation {gen}!")
+    #     break
+
+    selected = selection(population, scores)
+
+    childs = crossover(selected)
+
+    population = mutation(childs)
+
+print("\n=== FINAL POPULATION ===")
+print(population)
