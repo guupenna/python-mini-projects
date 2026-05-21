@@ -30,22 +30,31 @@ def crossover(parents, rate=0.7):
     prob = np.random.rand(half)
     mask_prob = prob <= rate
 
-    cross = np.random.randint(low=1, high=4)
+    cross_point = np.random.randint(low=1, high=4)
 
     childs_1 = parents_a.copy()
     childs_2 = parents_b.copy()
 
-    childs_1[mask_prob] = np.hstack((parents_a[mask_prob, :cross], parents_b[mask_prob, cross:]))
-    childs_2[mask_prob] = np.hstack((parents_b[mask_prob , :cross], parents_a[mask_prob, cross:]))
+    childs_1[mask_prob] = np.hstack((parents_a[mask_prob, :cross_point], parents_b[mask_prob, cross_point:]))
+    childs_2[mask_prob] = np.hstack((parents_b[mask_prob, :cross_point], parents_a[mask_prob, cross_point:]))
 
     return np.vstack((childs_1, childs_2))
 
 #    childs_1 = []
 #    for i in range(0, half):
-#        childs_1.append(np.concatenate((parents_a[i][:cross], parents_b[i][cross:])))   
+#        childs_1.append(np.concatenate((parents_a[i][:cross_point], parents_b[i][cross_point:])))   
 #    childs_2 = []
 #    for i in range(0, half):
-#        childs_2.append(np.concatenate((parents_b[i][:cross], parents_a[i][cross:])))
+#        childs_2.append(np.concatenate((parents_b[i][:cross_point], parents_a[i][cross_point:])))
+
+def mutation(population, rate=0.05):
+    prob = np.random.rand(population.shape[0], population.shape[1])
+
+    mask_prob = prob <= rate
+
+    population[mask_prob] = population[mask_prob] ^ 1
+
+    return population
 
 
 population = np.random.randint(low=0, high=2, size=(10, 5))
@@ -55,3 +64,5 @@ scores = fitness(population)
 selected = selection(population, scores)
 
 crossover(selected)
+
+mutation(selected)
