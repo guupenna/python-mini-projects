@@ -1,2 +1,1 @@
-# python-mini-projects
-### A series of mini-projects to improve Python, NumPy and Pandas skills.
+### A series of mini-projects and exercises to learn more about AI, algorithms and Machine Learning.
