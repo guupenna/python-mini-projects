@@ -4,6 +4,7 @@ def fitness(population):
     score = np.sum(population, axis=1)
     return score
 
+
 def selection(population, scores):
     tournament = np.random.choice(len(population), size=(len(population), 2))
 
@@ -41,4 +42,3 @@ def mutation(population, rate=0.05):
     population[mask_prob] = population[mask_prob] ^ 1
 
     return population
-

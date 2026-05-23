@@ -18,6 +18,8 @@ def main():
         score_best = scores[index_best]
         best = population[index_best]
 
+        elite = best.copy()
+
         print(f"Generation {gen} | Best fitness: {round((score_best/GENES)*100, 2)}% | Genes: {best}")
 
         if score_best == GENES:
@@ -29,6 +31,8 @@ def main():
         childs = crossover(selected, CROSSOVER_RATE)
 
         population = mutation(childs, MUTATION_RATE)
+
+        population[0] = elite
 
     print("\n=== FINAL POPULATION ===")
     print(population)
