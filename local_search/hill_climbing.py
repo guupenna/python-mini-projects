@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 def calcula_lucro(sol):
     A, B, C = sol
@@ -84,6 +85,26 @@ def random_restart_hill_climbing():
 
     return melhor_solucao_global
 
+
+def stochastic_hill_climbing():
+    sol_atual = (0, 0, 0)
+
+    while(True):
+        vizinhos = gera_vizinhos(sol_atual)
+
+        if not vizinhos:
+            break
+
+        melhores_vizinhos = [v for v in vizinhos if calcula_lucro(v) > calcula_lucro(sol_atual)]
+
+        if not melhores_vizinhos:
+            break
+
+        sol_atual = random.choice(melhores_vizinhos)
+
+    return sol_atual
+
+
 if __name__ == "__main__":
     # solucao = vanilla_hill_climbing()
 
@@ -102,3 +123,12 @@ if __name__ == "__main__":
     print(f"Unidades do produto B: {solucao_rr[1]}")
     print(f"Unidades do produto C: {solucao_rr[2]}")
     print(f"Lucro calculado: {calcula_lucro(solucao_rr)}")
+
+    solucao_stochastic = stochastic_hill_climbing()
+
+    print("\n====== STOCHASTIC HILL CLIMBING ======\n")
+    print(f"Melhor plano de produção encontrado:")
+    print(f"Unidades do produto A: {solucao_stochastic[0]}")
+    print(f"Unidades do produto B: {solucao_stochastic[1]}")
+    print(f"Unidades do produto C: {solucao_stochastic[2]}")
+    print(f"Lucro calculado: {calcula_lucro(solucao_stochastic)}")
