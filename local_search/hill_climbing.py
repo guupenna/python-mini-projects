@@ -35,7 +35,7 @@ def gera_vizinhos(sol):
 def vanilla_hill_climbing():
         sol_atual = (0, 0, 0)
 
-        while(True):
+        while True:
             vizinhos = gera_vizinhos(sol_atual)
 
             if not vizinhos:
@@ -57,14 +57,14 @@ def random_restart_hill_climbing():
 
     for i in range(100):
         # Procura solução inicial aleatória válida
-        while(True):
+        while True:
             array = np.random.randint(0, 50, size=3)
             sol_atual = (array[0], array[1], array[2])
             if verifica_restricoes(sol_atual):
                 break
 
         # Executa hill climbin com a solução inicial normalmente
-        while(True):
+        while True:
             vizinhos = gera_vizinhos(sol_atual)
 
             if not vizinhos:
@@ -89,7 +89,7 @@ def random_restart_hill_climbing():
 def stochastic_hill_climbing():
     sol_atual = (0, 0, 0)
 
-    while(True):
+    while True:
         vizinhos = gera_vizinhos(sol_atual)
 
         if not vizinhos:
