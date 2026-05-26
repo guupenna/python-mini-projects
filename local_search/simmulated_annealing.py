@@ -14,7 +14,7 @@ def verifica_restricoes(sol):
 
     horas = 2*A + 4*B + 3*C
     recursos = 3*A + 2*B + 4*C
-
+    
     return horas <= 100 and recursos <= 90
 
 

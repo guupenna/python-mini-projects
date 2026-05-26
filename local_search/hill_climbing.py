@@ -33,22 +33,22 @@ def gera_vizinhos(sol):
 
 
 def vanilla_hill_climbing():
-        sol_atual = (0, 0, 0)
+    sol_atual = (0, 0, 0)
 
-        while True:
-            vizinhos = gera_vizinhos(sol_atual)
+    while True:
+        vizinhos = gera_vizinhos(sol_atual)
 
-            if not vizinhos:
-                break
+        if not vizinhos:
+            break
 
-            melhor_vizinho = max(vizinhos, key=calcula_lucro)
+        melhor_vizinho = max(vizinhos, key=calcula_lucro)
 
-            if calcula_lucro(melhor_vizinho) <= calcula_lucro(sol_atual):
-                break
-            
-            sol_atual = melhor_vizinho
+        if calcula_lucro(melhor_vizinho) <= calcula_lucro(sol_atual):
+            break
+        
+        sol_atual = melhor_vizinho
 
-        return sol_atual
+    return sol_atual
 
 
 def random_restart_hill_climbing():
