@@ -1,6 +1,7 @@
 import random
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 
 LOWER_BOUND = -1
 UPPER_BOUND = 2
@@ -45,8 +46,19 @@ def simmulated_annealing(T=100.0, T_min=0.1, alpha=0.95):
 
 
 if __name__ == "__main__":
-    solucao = simmulated_annealing()
 
+    x = np.linspace(-1, 2, 1000)
+    y = f(x)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(x, y, color='red')
+    plt.title("f(x) = x * sin(10πx) + 1")
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.grid(True)
+    plt.show()
+
+    solucao = simmulated_annealing()
     print("====== SIMMULATED ANNEALING ======\n")
     print(f"Melhor valor para x encontrado: {solucao}")
     print(f"f(x) = {f(solucao)}")
